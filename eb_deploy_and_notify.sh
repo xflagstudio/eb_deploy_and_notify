@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -x
 
 export SHA1=`echo ${CIRCLE_SHA1} | cut -c1-7`
 export ENV=`echo $1 | rev | cut -d \- -f1 | rev`
