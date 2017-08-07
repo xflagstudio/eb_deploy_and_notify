@@ -7,14 +7,14 @@ export ENV=`echo $1 | rev | cut -d \- -f1 | rev`
 function dd_mute() {
     if [[ ${DD_MUTE_ID+x} ]]; then
         echo "muting DD monitor id: ${DD_MUTE_ID}"
-        curl -X POST "https://app.datadoghq.com/api/v1/monitor/${DD_MUTE_ID}/mute?api_key=${DD_API_KEY}&application_key=${$DD_APP_KEY}"
+        curl -X POST "https://app.datadoghq.com/api/v1/monitor/${DD_MUTE_ID}/mute?api_key=${DD_API_KEY}&application_key=${DD_APP_KEY}"
     fi
 }
 
 function dd_unmute() {
     if [[ ${DD_MUTE_ID+x} ]]; then
         echo "un-muting DD monitor id: ${DD_MUTE_ID}"
-        curl -X POST "https://app.datadoghq.com/api/v1/monitor/${DD_MUTE_ID}/unmute?api_key=${DD_API_KEY}&application_key=${$DD_APP_KEY}"
+        curl -X POST "https://app.datadoghq.com/api/v1/monitor/${DD_MUTE_ID}/unmute?api_key=${DD_API_KEY}&application_key=${DD_APP_KEY}"
     fi
 }
 
