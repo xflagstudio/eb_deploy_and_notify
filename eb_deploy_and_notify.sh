@@ -20,7 +20,7 @@ function dd_unmute() {
 
 dd_mute
 
-eb deploy $1 -v
+eb deploy $1 -v --timeout 15
 
 if [ $? -eq 0 ]; then
     export SL_COLOR="good"
