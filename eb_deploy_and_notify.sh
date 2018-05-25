@@ -18,6 +18,13 @@ function dd_unmute() {
     fi
 }
 
+function notify() {
+    if [[ ${ROLLBAR_ACCESS_TOKEN+x} ]]; then
+        echo "notifying rollbar"
+        curl https://api.rollbar.com/api/1/deploy/ -F access_token=$ROLLBAR_ACCESS_TOKEN -F environment=$ENV -F revision=$CIRCLE_SHA1 -F local_username=$CIRCLE_USERNAME -F comment="$CIRCLE_BUILD_URL"
+    fi
+}
+
 dd_mute
 
 eb deploy $1 -v --timeout 15
@@ -27,6 +34,7 @@ if [ $? -eq 0 ]; then
     export SL_TEXT="Success: Deployed ${CIRCLE_BRANCH} (<${CIRCLE_COMPARE_URL}|${SHA1}>) by ${CIRCLE_USERNAME} !!"
     export SL_ICON="https://www.cloudbees.com/sites/default/files/eleasticbeanstalk_square.png"
     export EXIT=0
+    notify
 else
     export SL_COLOR="danger"
     export SL_TEXT="Failure: Deploying ${CIRCLE_BRANCH} (<${CIRCLE_COMPARE_URL}|${SHA1}>) by ${CIRCLE_USERNAME} !!"
