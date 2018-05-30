@@ -22,7 +22,6 @@ Elastic Beanstalkデプロイ＆通知スクリプト（CircleCI用）
           shell: /bin/bash
           command: |
             set -e
-            source ~/venv/bin/activate
             eb --version
             EB_ENV=`eb list | grep '*' | awk '{print $2}'`
             echo "${CIRCLE_BRANCH}" ; echo "${EB_ENV}"
