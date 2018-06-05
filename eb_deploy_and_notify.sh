@@ -42,7 +42,9 @@ else
     export EXIT=1
 fi
 
-curl -X POST --data-urlencode 'payload={"username": "Elastic Beanstalk ('"$CIRCLE_PROJECT_REPONAME"')", "icon_url": "'"$SL_ICON"'", "channel": "'"${CHANNEL:-#test}"'", "attachments": [{ "color": "'"$SL_COLOR"'", "text": "'"$SL_TEXT"'", "mrkdwn_in": ["text"] }] }' https://hooks.slack.com/services/${SLACK_HOOK}
+if [[ ${SLACK_HOOK+x} ]]; then
+    curl -X POST --data-urlencode 'payload={"username": "Elastic Beanstalk ('"$CIRCLE_PROJECT_REPONAME"')", "icon_url": "'"$SL_ICON"'", "channel": "'"${CHANNEL:-#test}"'", "attachments": [{ "color": "'"$SL_COLOR"'", "text": "'"$SL_TEXT"'", "mrkdwn_in": ["text"] }] }' https://hooks.slack.com/services/${SLACK_HOOK}
+fi
 
 dd_unmute
 
